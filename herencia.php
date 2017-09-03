@@ -1,24 +1,54 @@
 <?php
 	
-class Unit{
+abstract class Unit{
+
+	protected $alive;
+	protected $name;
+
+	public function __construct($name){
+		$this->name= $name;
+		$this->alive= true;
+	}
+
+	public function move($direction){
+		echo "<p>{$this->name} se mueve hacia $direction</p>";
+	}
+
+	public abstract function attack(Unit $opponent);
+
+
 
 }
 
-class Soldier{
 
+
+
+class Soldier extends Unit{
+
+	public function attack(Unit $opponent){
+		echo "<p>{$this->name} corta en dos a {$opponent->name}</p>";
+	}
 }
 
-class Archer{
 
+class Archer extends Unit{
+
+	public function attack(Unit $opponent){
+		echo "<p>{$this->name} dispara una flecha a {$opponent->name}</p>";
+	}
 }
 
-echo 'Hello 2';
-echo '<br/>';
-echo 'Esto es otra cosa';
-echo '<br/>';
-echo 'tercera linea 2';
-echo '<br/>';
-echo 'nueva linea';
-echo '<br/>';
-echo 'nueva lineas';
+
+
+$soldado= new Soldier('Warrino');
+$arquero= new Archer('Legolas');
+
+$soldado->move('la izquierda');
+
+$soldado->attack($arquero);
+
+
+
+
+
 ?>

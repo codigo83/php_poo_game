@@ -9,11 +9,12 @@ abstract class Unit{
 
 
 	protected $alive;
-	protected $hp= 100;
+	protected $hp;
 	protected $name;
 
-	public function __construct($name){
+	public function __construct($name, $hp){
 		$this->name= $name;
+		$this->hp= $hp;
 		$this->alive= true;
 	}
 
@@ -83,7 +84,16 @@ abstract class Unit{
 
 class Soldier extends Unit{
 
-	protected $damage= 38;
+	protected $damage;
+	
+	public function __construct($name, $hp, $damage){
+		parent::__construct($name, $hp);
+		$this->damage= $damage;
+	}
+
+	public function getDamage(){
+		return $this->damage;
+	}
 
 	public function attack(Unit $opponent){
 
@@ -108,8 +118,17 @@ class Soldier extends Unit{
 
 class Archer extends Unit{
 
-	protected $damage= 30;
+	protected $damage;
 	
+	public function __construct($name, $hp, $damage){
+		parent::__construct($name, $hp);
+		$this->damage= $damage;
+	}
+
+	public function getDamage(){
+		return $this->damage;
+	}
+
 
 	public function attack(Unit $opponent){
 
@@ -125,7 +144,7 @@ class Archer extends Unit{
 
 		if( rand(0,1) ){
 			
-			show("{$this->getName()} esquivó el ataque");
+			show("<strong>{$this->getName()}</strong> esquivó el ataque");
 		}else{
 			parent::takeDamage( $damage );
 		}
@@ -145,8 +164,11 @@ class Battle{
 	}
 
 	public function start(){
-		show("<p><strong>Comienza la batalla entre {$this->a->getName()} y {$this->b->getName()}</strong></p>");
-		
+		show("<strong>Comienza la batalla entre {$this->a->getName()} y {$this->b->getName()}</strong>");
+		show("<mark style='background-color: yellow'><strong>{$this->a->getName()}</strong> hp: ({$this->a->getHp()}), damage: ({$this->a->getDamage()})</mark> ");
+		show("<mark style='background-color: lightblue'><strong>{$this->b->getName()}</strong> hp: ({$this->b->getHp()}), damage: ({$this->b->getDamage()}) </mark>");
+		show("<hr/>");
+
 		while($this->status()){
 
 			$this->a->attack($this->b);
@@ -172,8 +194,8 @@ class Battle{
 
 
 
-$soldado= new Soldier('Áragon');
-$arquero= new Archer('Legolas');
+$soldado= new Soldier('Áragon', 50, 50);
+$arquero= new Archer('Legolas', 100, 30);
 
 $batalla= new Battle( $soldado, $arquero);
 

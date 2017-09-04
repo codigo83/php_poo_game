@@ -4,16 +4,14 @@ namespace Codigo83;
 
 class Archer extends Unit{
 
-	protected $damage;
+	
 	
 	public function __construct($name, $hp, $damage){
-		parent::__construct($name, $hp);
-		$this->damage= $damage;
+		parent::__construct($name, $hp, $damage);
+	
 	}
 
-	public function getDamage(){
-		return $this->damage;
-	}
+	
 
 
 	public function attack(Unit $opponent){
@@ -22,7 +20,7 @@ class Archer extends Unit{
 
 			show( "<mark style='background-color:lightblue'>({$this->getHp()}) {$this->name}</mark> dispara una flecha a {$opponent->name}" );
 
-			$opponent->takeDamage( $this->getArm()->getDamage() );
+			$opponent->takeDamage( $this->getDamage() + $this->getArm()->getDamage() / 2 );
 
 		}
 	}

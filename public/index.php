@@ -13,12 +13,12 @@ require '../src/helpers.php';
 $bronceArm= new BronceArmour();
 $silverArm= new SilverArmour();
 
-$espada= new Arm('Espada');
-$flecha= new Arm('Flecha');
+$espada= new Arm('Espada', 15);
+$flecha= new Arm('Flecha', 7);
 
 
-$soldado= new Soldier('Áragon', 20, 30);
-$arquero= new Archer('Legolas', 20, 35);
+$soldado= new Soldier('Áragon', 50, 12);
+$arquero= new Archer('Legolas', 50, 8);
 
 $soldado->setArm( $espada );
 $arquero->setArm( $flecha );
@@ -26,8 +26,8 @@ $arquero->setArm( $flecha );
 
 $batalla= new Battle( $soldado, $arquero);
 
-$soldado->setArmour($bronceArm);
-$arquero->setArmour($silverArm);
+//$soldado->setArmour($bronceArm);
+//$arquero->setArmour($bronceArm);
 
 $batalla->start();
 

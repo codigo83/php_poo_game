@@ -12,10 +12,12 @@ abstract class Unit{
 	protected $name;
 	protected $armour= null;
 	protected $arm;
+	protected $damage;
 
-	public function __construct($name, $hp){
+	public function __construct($name, $hp, $damage){
 		$this->name= $name;
 		$this->hp= $hp;
+		$this->damage= $damage;
 		$this->alive= true;
 		$this->arm= null; 
 	}
@@ -52,6 +54,12 @@ abstract class Unit{
 		return $this->arm;
 	}
 
+	public function getDamage(){
+		return $this->damage;
+	}
+	public function setDamage($damage){
+		$this->damage= $damage;
+	}
 
 	public function hasArmour(){
 		return $this->armour;

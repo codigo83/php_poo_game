@@ -16,7 +16,7 @@ class Arm{
 		return $this->damage;
 	}
 	public function toString(){
-		return $this->getName();
+		return $this->getName() . ", " . $this->getDamage();
 	}
 }
 

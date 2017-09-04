@@ -1,22 +1,21 @@
 <?php
 
-namespace Codigo83;
+namespace Codigo83\Armors;
 
-use WarmCookie\Armour as AliasBronce;
 
-class BronceArmour implements AliasBronce{
+
+class SilverArmour implements Armor{
 
 	public function damage($damage){
-		return $damage / 2;
+		return $damage / 4;
 	}
 	public function absorbDamage($damage){
 		return round( $this->damage($damage) );
 	}
 	public function toString(){
-		return get_class($this);
+		return str_replace('Codigo83\\', '', get_class($this));
 	}
 
 }
-
 
 ?>

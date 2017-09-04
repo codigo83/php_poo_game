@@ -1,8 +1,8 @@
 <?php
 
-namespace WarmCookie;
+namespace Codigo83\Armors;
 
-interface Armour{
+interface Armor{
 	public function absorbDamage($damage);
 
 }

@@ -2,8 +2,7 @@
 
 namespace Codigo83;
 
-
-use WarmCookie\Armour;
+use Codigo83\Armors\Armor;
 
 abstract class Unit{
 
@@ -40,7 +39,7 @@ abstract class Unit{
 		$this->hp = $hp;
 	}
 
-	public function setArmour(Armour $armour){
+	public function setArmour(Armor $armour){
 		$this->armour= $armour;
 	}
 

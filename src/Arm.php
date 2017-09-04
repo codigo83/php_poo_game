@@ -5,7 +5,7 @@ namespace Codigo83;
 class Arm{
 	protected $name;
 	protected $damage;
-	public function __construct($name, $damage){
+	public function __construct($name, $damage= 10){
 		$this->name= $name;
 		$this->damage= $damage;
 	}
@@ -16,7 +16,7 @@ class Arm{
 		return $this->damage;
 	}
 	public function toString(){
-		return $this->getName() . ', ' . $this->getDamage();
+		return $this->getName();
 	}
 }
 

@@ -2,7 +2,8 @@
 
 namespace Codigo83;
 
-use Codigo83\Armors\Armor;
+use Codigo83\Armor;
+use Codigo83\Weapon;
 
 abstract class Unit{
 
@@ -10,16 +11,15 @@ abstract class Unit{
 	protected $alive;
 	protected $hp;
 	protected $name;
-	protected $armour= null;
-	protected $arm;
-	protected $damage;
+	protected $armor;
+	protected $weapon;
 
-	public function __construct($name, $hp, $damage){
+	public function __construct($name, Weapon $weapon){
 		$this->name= $name;
-		$this->hp= $hp;
-		$this->damage= $damage;
+		$this->hp= 100;
 		$this->alive= true;
-		$this->arm= null; 
+		$this->weapon= $weapon; 
+		$this->armor= null;
 	}
 
 
@@ -41,28 +41,23 @@ abstract class Unit{
 		$this->hp = $hp;
 	}
 
-	public function setArmour(Armor $armour){
-		$this->armour= $armour;
-	}
+	
 
 
-	public function setArm(Arm $arm){
-		$this->arm= $arm;
+	public function setWeapon(Weapon $weapon){
+		$this->weapon= $weapon;
 	}
 
-	public function getArm(){
-		return $this->arm;
+	public function getWeapon(){
+		return $this->weapon;
 	}
 
-	public function getDamage(){
-		return $this->damage;
-	}
-	public function setDamage($damage){
-		$this->damage= $damage;
+	public function setArmour(Armor $armor){
+		$this->armor= $armor;
 	}
 
-	public function hasArmour(){
-		return $this->armour;
+	public function hasArmor(){
+		return $this->armor;
 	}
 
 	public function move($direction){
@@ -71,37 +66,43 @@ abstract class Unit{
 
 	//Otras funciones
 
+	//Recibir daño
 	public function takeDamage($damage){
 
+		$damage= $this->absorbDamage($damage);
 
 		$this->hp= $this->hp - $damage;
 
 		if($this->hp <= 0){
 			$this->die();
 		}else{
+			
 
-			show("<strong>{$this->name}</strong> pierde {$damage} puntos de vida");
+			show("<mark style='background-color:IndianRed'><strong>{$this->name}</strong> pierde {$damage} puntos de vida. Ahora tiene (". $this->hp .")</mark>");
 		}
 
 	
 	}
 
+	//absorber daño
 	public function absorbDamage($damage){
 		
-		if($this->armour){
-
-			$damage= $this->armour->absorbDamage($damage);
+		if($this->armor){
+			
+			$damage= $this->armor->absorbDamage($damage);
 			
 		}
 		return $damage;
 	}
+
+
 
 	public function die(){
 
 		if($this->getAlive()){
 
 			$this->alive= false;
-			show("<mark style='background-color:IndianRed'><strong>{$this->getName()}</strong> ha muerto</mark>");	
+			show("<mark style='background-color:Crimson'><strong>{$this->getName()}</strong> ha muerto</mark>");	
 
 		}else{
 			show("Le estas pegando a un cadaver");
@@ -112,7 +113,37 @@ abstract class Unit{
 
 	
 
-	public abstract function attack(Unit $opponent);
+	public function attack(Unit $opponent){
+
+
+		if( $this->getAlive() ){
+			
+			
+			if($this->weapon === null){
+				die('meek');
+			}
+
+
+			show( "<mark style='background-color:yellow'>". $this->weapon->descriptionAttack($this, $opponent) . "</mark>" );
+
+			if( rand(0, $opponent->getAgility() ) == 0 ){
+
+				$opponent->takeDamage( $this->weapon->getDamage()  );
+			
+			}else{
+				
+				show("<mark style='background-color:DeepSkyBlue'><strong>". $opponent->getName() ."</strong> esquiva el ataque. Ahora tiene hp: (". $opponent->getHp() .")</mark>");
+			}
+		}
+
+
+	}
+
+
+
+
+
+
 
 }
 

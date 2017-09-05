@@ -2,42 +2,25 @@
 
 namespace Codigo83;
 
+use Codigo83\Weapons\Bow;
+use Codigo83\Weapons\BasicBow;
+
 class Archer extends Unit{
 
-	
-	
-	public function __construct($name, $hp, $damage){
-		parent::__construct($name, $hp, $damage);
-	
+	private $agility= 3;
+
+
+	public function __construct($name, Bow $bow= null){
+
+		$bow= ($bow === null)? new BasicBow() : $bow;
+		
+		parent::__construct($name, $bow );
 	}
 
-	
-
-
-	public function attack(Unit $opponent){
-
-		if($this->getAlive() && $opponent->getAlive() ){
-
-			show( "<mark style='background-color:lightblue'>({$this->getHp()}) {$this->name}</mark> dispara una flecha a {$opponent->name}" );
-
-			$opponent->takeDamage( $this->getDamage() + $this->getArm()->getDamage() / 2 );
-
-		}
+	public function getAgility(){
+		return $this->agility;
 	}
-
-	public function takeDamage($damage){
-
-		if( rand(0,1) != 0 ){
-			
-			show("<strong>{$this->getName()}</strong> esquivó el ataque");
-		}else{
-			$damage= $this->absorbDamage($damage);
-			parent::takeDamage( $damage );
-		}
-	
-	}
-
+	//
 
 }
 
-?>

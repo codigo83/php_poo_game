@@ -7,16 +7,36 @@ class Battle{
 	private $fighterB;
 	
 	public function __construct(Unit $a, Unit $b){
-		$this->fighterA= $a;
-		$this->fighterB= $b;
+
+		//Sera aleatorio
+
+		if( rand(0,1) === 0 ){
+			$this->fighterA= $a;
+			$this->fighterB= $b;	
+		}else{
+			$this->fighterA= $b;
+			$this->fighterB= $a;
+		}
+
+		 
+		
 	}
 
 	public function start(){
 		show("<strong>Comienza la batalla entre {$this->fighterA->getName()} y {$this->fighterB->getName()}</strong>");
-		show("<small><u>Formula del daño</u> = (daño de arma + daño de guerrero / 2)</small>");
-		show("<mark style='background-color: yellow'><strong>{$this->fighterA->getName()}</strong> hp: ({$this->fighterA->getHp()}), arm: ({$this->fighterA->getArm()->toString()}), damage: (".$this->fighterA->getDamage()."), armour: (" . ((  $this->fighterA->hasArmour()  )?  $this->fighterA->hasArmour()->toString()  : 'no') . "), Hit damage == [". (($this->fighterA->getDamage() + $this->fighterA->getArm()->getDamage()) / 2) ."]</mark> ");
-		show("<mark style='background-color: lightblue'><strong>{$this->fighterB->getName()}</strong> hp: ({$this->fighterB->getHp()}), arm: ({$this->fighterB->getArm()->toString()}), damage: (".$this->fighterB->getDamage()."), armour: (" . ((  $this->fighterB->hasArmour()  )? $this->fighterB->hasArmour()->toString() : 'no') . "), Hit damage == [". (($this->fighterB->getDamage() + $this->fighterB->getArm()->getDamage()) / 2) ."]</mark>");
+
+	
+		
+		
+		show("<strong>{$this->fighterA->getName()}</strong> hp: ({$this->fighterA->getHp()}), arm: ({$this->fighterA->getWeapon()->toString()}), armor: (" . ((  $this->fighterA->hasArmor()  )?  $this->fighterA->hasArmor()->toString()  : 'no') . ") ");
+		
+		
+		show("<strong>{$this->fighterB->getName()}</strong> hp: ({$this->fighterB->getHp()}), arm: ({$this->fighterB->getWeapon()->toString()}), armor: (" . ((  $this->fighterB->hasArmor()  )? $this->fighterB->hasArmor()->toString() : 'no') . ")");
+		
+		show("<mark style='background-color: yellow'>Comienza ({$this->fighterA->getName()})</mark>");
+		
 		show("<hr/>");
+
 
 		while($this->status()){
 			

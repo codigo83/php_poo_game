@@ -2,32 +2,33 @@
 
 namespace Codigo83;
 
-use Codigo83\Armors\BronceArmour;
-use Codigo83\Armors\SilverArmour;
+use Codigo83\Armors\BronceArmor;
+use Codigo83\Armors\SilverArmor;
+use Codigo83\Weapons\BasicSword;
+use Codigo83\Weapons\BasicBow;
+use Codigo83\Weapons\StrongSword;
+use Codigo83\Weapons\StrongBow;
+
+
 
 require '../vendor/autoload.php';
 require '../src/helpers.php'; 
 
 
 
-$bronceArm= new BronceArmour();
-$silverArm= new SilverArmour();
 
-$espada= new Arm('Espada', 15);
-$flecha= new Arm('Flecha', 7);
+$soldado= new Soldier('Áragon');
+$arquero= new Archer('Legolas');
+
+$soldado->setWeapon( new StrongSword() );
+$arquero->setWeapon( new StrongBow() );
 
 
-$soldado= new Soldier('Áragon', 50, 12);
-$arquero= new Archer('Legolas', 50, 8);
-
-$soldado->setArm( $espada );
-$arquero->setArm( $flecha );
-
+$soldado->setArmour( new BronceArmor() );
+$arquero->setArmour( new SilverArmor() );
 
 $batalla= new Battle( $soldado, $arquero);
 
-//$soldado->setArmour($bronceArm);
-//$arquero->setArmour($bronceArm);
 
 $batalla->start();
 

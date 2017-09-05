@@ -1,9 +1,11 @@
 <?php
 
-namespace Codigo83\Armors;
+namespace Codigo83;
 
 interface Armor{
 	public function absorbDamage($damage);
+
+	
 
 }
 

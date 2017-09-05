@@ -2,43 +2,25 @@
 
 namespace Codigo83;
 
+use Codigo83\Weapons\Sword;
+use Codigo83\Weapons\BasicSword;
+
 class Soldier extends Unit {
 
-	
-	
-	
-	public function __construct($name, $hp, $damage){
-		parent::__construct($name, $hp, $damage);
-		
-		
-	}
-	
-	
-	
+	private $agility= 2;
 
 
-	public function attack(Unit $opponent){
+	public function __construct($name, Sword $sword= null){
 
-		if( $this->getAlive() && $opponent->getAlive()){
+		$sword= ($sword === null)? new BasicSword() : $sword;
 
-			show( "<mark style='background-color:yellow' >({$this->getHp()}) {$this->name}</mark> golpea con su espada a  {$opponent->name}" );
-			$opponent->takeDamage( $this->getDamage() + $this->getArm()->getDamage() / 2 );
-		}
-		
-
+		parent::__construct($name, $sword );
 	}
 
-
-	public function takeDamage($damage){
-		
-		$damage= $this->absorbDamage($damage);
-
-		return parent::takeDamage( $damage );
-		
+	public function getAgility(){
+		return $this->agility;
 	}
-
-	
-
+	//
 }
 
-?>
+

@@ -2,13 +2,14 @@
 
 namespace Codigo83\Weapons;
 
-use Codigo83\Weapons\Sword;
+use Codigo83\Weapon;
 
-class StrongSword extends Sword{
+class StrongSword extends Weapon{
 
 
 	const DAMAGE= 80;
-	protected $name= "Espada de la muerte";
+
+	protected $description= ":unit corta con la Espada de la muerte a :opponent";
 
 
 }

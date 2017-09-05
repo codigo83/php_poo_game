@@ -4,8 +4,11 @@ namespace Codigo83;
 
 use Codigo83\Armor;
 use Codigo83\Weapon;
+use Codigo83\Weapons\Stick;
+use Codigo83\Weapons\StrongBow;
 
-abstract class Unit{
+
+class Unit{
 
 
 	protected $alive;
@@ -14,11 +17,13 @@ abstract class Unit{
 	protected $armor;
 	protected $weapon;
 
-	public function __construct($name, Weapon $weapon){
+	public function __construct($name, Weapon $weapon= null){
+
+		$this->weapon= (( $weapon === null )? new Stick() : $weapon );
+		
 		$this->name= $name;
 		$this->hp= 100;
 		$this->alive= true;
-		$this->weapon= $weapon; 
 		$this->armor= null;
 	}
 
@@ -67,9 +72,9 @@ abstract class Unit{
 	//Otras funciones
 
 	//Recibir daño
-	public function takeDamage($damage){
+	public function takeDamage(Attack $attack){
 
-		$damage= $this->absorbDamage($damage);
+		$damage= $this->absorbDamage($attack->getDamage());
 
 		$this->hp= $this->hp - $damage;
 
@@ -118,26 +123,30 @@ abstract class Unit{
 
 		if( $this->getAlive() ){
 			
-			
-			if($this->weapon === null){
-				die('meek');
-			}
+			$attack= $this->weapon->createAttack();
 
+			//var_dump($attack);die();
 
-			show( "<mark style='background-color:yellow'>". $this->weapon->descriptionAttack($this, $opponent) . "</mark>" );
+			show(  $attack->getDescription( $this, $opponent )  );
 
-			if( rand(0, $opponent->getAgility() ) == 0 ){
+			if( rand(0, 1 ) == 0 ){
 
-				$opponent->takeDamage( $this->weapon->getDamage()  );
+				$opponent->takeDamage( $attack  );
 			
 			}else{
 				
 				show("<mark style='background-color:DeepSkyBlue'><strong>". $opponent->getName() ."</strong> esquiva el ataque. Ahora tiene hp: (". $opponent->getHp() .")</mark>");
 			}
+
+
+
 		}
 
 
 	}
+
+
+
 
 
 

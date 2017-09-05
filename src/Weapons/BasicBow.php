@@ -3,13 +3,13 @@
 namespace Codigo83\Weapons;
 
 
-use Codigo83\Unit;
+use Codigo83\Weapon;
 
-class BasicBow extends Bow{
+class BasicBow extends Weapon{
 
 	const DAMAGE= 25;
-	protected $name= "Arco básico";
 
+	protected $description= ":unit dispara una flecha con el Arco básico a  :opponent";
 	
 	
 	

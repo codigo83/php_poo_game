@@ -8,6 +8,7 @@ use Codigo83\Weapons\BasicSword;
 use Codigo83\Weapons\BasicBow;
 use Codigo83\Weapons\StrongSword;
 use Codigo83\Weapons\StrongBow;
+use Codigo83\Weapons\Stick;
 
 
 
@@ -17,11 +18,13 @@ require '../src/helpers.php';
 
 
 
-$soldado= new Soldier('Áragon');
-$arquero= new Archer('Legolas');
+$soldado= new Unit('Áragon');
+$arquero= new Unit('Legolas');
+
 
 $soldado->setWeapon( new StrongSword() );
 $arquero->setWeapon( new StrongBow() );
+
 
 
 $soldado->setArmour( new BronceArmor() );

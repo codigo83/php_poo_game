@@ -2,12 +2,12 @@
 
 namespace Codigo83\Weapons;
 
-use Codigo83\Weapons\Bow;
+use Codigo83\Weapon;
 
-class StrongBow extends Bow{
+class StrongBow extends Weapon{
 
 	const DAMAGE= 50;
-	protected $name= "Arco valirio";
+	protected $description= ":unit dispara una flecha con el Arco valirio a :opponent";
 
 
 

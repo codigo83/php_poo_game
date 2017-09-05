@@ -6,7 +6,13 @@ abstract class Weapon{
 	
 	const DAMAGE= 10;
 	protected $name;
-	
+	protected $description= ':unit ataca a :opponent';
+
+	public function createAttack(){
+
+		return new Attack(static::DAMAGE, false, $this->description); 
+	}
+
 	
 	public function getDamage(){
 		return static::DAMAGE;
@@ -32,6 +38,7 @@ abstract class Weapon{
 
 	
 
+	
 
 }
 

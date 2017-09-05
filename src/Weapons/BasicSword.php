@@ -2,13 +2,14 @@
 
 namespace Codigo83\Weapons;
 
-use Codigo83\Weapons\Sword;
+use Codigo83\Weapon;
 
 
-class BasicSword extends Sword{
+class BasicSword extends Weapon{
 
 	const DAMAGE= 60;
-	protected $name= "Espada básica";
+
+	protected $description= ":unit corta con la Espada básica a :opponent";
 
 	
 
